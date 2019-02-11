@@ -1,25 +1,25 @@
 //Connexion à la base de donnée POSTGRESQL
 const { Client } = require('pg');
 const client = new Client({
-  connectionString: 'postgres://ozbctqqchiljth:5f22d877c8494e181c8a357c31fe010526b8794c23d13a55e0b9898d1e425bcb@ec2-46-137-121-216.eu-west-1.compute.amazonaws.com:5432/d7gccoqn0007v3',
+  connectionString: '    postgres://flvplnmuclkyse:9c230d848e6041a4f420f1a1338299c1aa7e539040a06a66fc29051c342ebab3@ec2-176-34-113-195.eu-west-1.compute.amazonaws.com:5432/d9mmv2kdajki9a',
   ssl: true,
 });
 
 client.connect();
-/*
-client.query("CREATE TABLE room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
-if (err) throw err;
-});
-client.query("CREATE TABLE appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
-if (err) throw err;
-});
-client.query("CREATE TABLE message (content text, id_room int REFERENCES room (id_room), id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
-if (err) throw err;
-});
-client.query("CREATE TABLE vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
-if (err) throw err;
-});
 
+client.query("CREATE TABLE IF NOT EXISTS room (id_room INT PRIMARY KEY NOT NULL, anonyme bool);", (err, res) => {
+if (err) throw err;
+});
+client.query("CREATE TABLE IF NOT EXISTS appuser (id_user SERIAL PRIMARY KEY NOT NULL, username text, role int, id_room int REFERENCES room (id_room));", (err, res) => {
+if (err) throw err;
+});
+client.query("CREATE TABLE IF NOT EXISTS message (content text, id_room int REFERENCES room (id_room), id_user int REFERENCES appuser (id_user), id_message SERIAL PRIMARY KEY NOT NULL, answered bool, comment int, quizz jsonb);", (err, res) => {
+if (err) throw err;
+});
+client.query("CREATE TABLE IF NOT EXISTS vote (id_user int REFERENCES appuser (id_user), id_message int REFERENCES message (id_message), vote int, PRIMARY KEY (id_user, id_message));", (err, res) => {
+if (err) throw err;
+});
+/*
 client.query("INSERT INTO room VALUES (7000,FALSE);", (err, res) => {
 if (err) throw err;
 console.log(res);
