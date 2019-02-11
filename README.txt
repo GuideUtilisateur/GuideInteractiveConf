@@ -12,6 +12,6 @@ Effectuer un commit:
 Récuperer la derniere version du projet:
   git pull origin master
 
-Lancer le serveur en local:
+Lancer le serveur en local (ne fonctionne plus en local depuis l'implémentation de la base de données):
   npm start
   localhost:5000
